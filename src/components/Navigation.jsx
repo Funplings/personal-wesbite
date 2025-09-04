@@ -1,29 +1,28 @@
-const Navigation = ({ activeSection, setActiveSection }) => {
+import { Link, useLocation } from 'react-router-dom'
+
+const Navigation = () => {
+  const location = useLocation()
+  
   const sections = [
-    { id: 'home', label: 'Home' },
-    { id: 'fan-art', label: 'Fan Art' },
-    { id: 'prints', label: 'Prints' },
-    { id: 'originals', label: 'Original Pieces' },
-    { id: 'thumbnails', label: 'YouTube Thumbnails' },
-    { id: 'key-art', label: 'Game Key Art' }
+    { path: '/', label: 'Home' },
+    { path: '/portfolio', label: 'Portfolio' }
   ];
 
   return (
     <header className="header">
       <nav className="nav">
         <div className="logo">
-          <h1>Matthew Guo</h1>
-          <p>Digital Artist</p>
+          <h1>Funplings</h1>
         </div>
         <ul className="nav-links">
           {sections.map(section => (
-            <li key={section.id}>
-              <button
-                className={`nav-link ${activeSection === section.id ? 'active' : ''}`}
-                onClick={() => setActiveSection(section.id)}
+            <li key={section.path}>
+              <Link
+                to={section.path}
+                className={`nav-link ${location.pathname === section.path ? 'active' : ''}`}
               >
                 {section.label}
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
